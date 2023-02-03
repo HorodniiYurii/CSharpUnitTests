@@ -14,9 +14,9 @@ namespace CSharpTest
         [TestMethod]
         public void TestNoWeekEnd()
         {
-            //входящая дата
+         
             DateTime startDate = new DateTime(2021, 12, 1);
-            //количетсво рабочих дней, длительность
+         
             int count = 10;
 
             DateTime result = new WorkDayCalculator().Calculate(startDate, count, null);
@@ -27,11 +27,10 @@ namespace CSharpTest
         [TestMethod]
         public void TestNormalPath()
         {
-            //входящая дата
             DateTime startDate = new DateTime(2021, 4, 21);
-            //количетсво рабочих дней, длительность
+            
             int count = 5;
-            //выходные
+            
             WeekEnd[] weekends = new WeekEnd[1]
             {
                 new WeekEnd(new DateTime(2021, 4, 23), new DateTime(2021, 4, 25))
