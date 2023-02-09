@@ -74,5 +74,61 @@ namespace CSharpTest
 
             Assert.IsTrue(result.Equals(new DateTime(2021, 4, 29)));
         }
+
+        //TEST 5 StartDate coincide the last day of one of the weekends.
+        [TestMethod]
+        public void TestDateStartCoincideLastDay()
+        {
+            DateTime startDate = new DateTime(2021, 4, 5);
+            int count = 10;
+            WeekEnd[] weekends = new WeekEnd[2]
+            {
+                new WeekEnd(new DateTime(2021, 4, 3), new DateTime(2021, 4, 5)),
+                new WeekEnd(new DateTime(2021, 4, 10), new DateTime(2021, 4, 13))
+
+            };
+
+            DateTime result = new WorkDayCalculator().Calculate(startDate, count, weekends);
+
+            Assert.IsTrue(result.Equals(new DateTime(2021, 4, 19)));
+        }
+
+        //TEST 7 StartDate coincide with one of the weekends and it consists of 1 day.
+        [TestMethod]
+        public void TestDateStartCoincideLastOneDay()
+        {
+            DateTime startDate = new DateTime(2021, 4, 5);
+            int count = 10;
+            WeekEnd[] weekends = new WeekEnd[2]
+            {
+                new WeekEnd(new DateTime(2021, 4, 5), new DateTime(2021, 4, 5)),
+                new WeekEnd(new DateTime(2021, 4, 10), new DateTime(2021, 4, 13))
+
+            };
+
+            DateTime result = new WorkDayCalculator().Calculate(startDate, count, weekends);
+
+            Assert.IsTrue(result.Equals(new DateTime(2021, 4, 19)));
+        }
+
+
+        //Test 6 StartDate falls between weekends and falls on 1 of the weekends.
+        [TestMethod]
+        public void TestDateStartBetweenWeekends()
+        {
+            DateTime startDate = new DateTime(2021, 4, 23);
+            int count = 6;
+            WeekEnd[] weekends = new WeekEnd[3]
+            {
+                new WeekEnd(new DateTime(2021, 4, 20), new DateTime(2021, 4, 21)),
+                new WeekEnd(new DateTime(2021, 4, 28), new DateTime(2021, 4, 28)),
+                new WeekEnd(new DateTime(2021, 4, 29), new DateTime(2021, 4, 29))
+
+            };
+
+            DateTime result = new WorkDayCalculator().Calculate(startDate, count, weekends);
+
+            Assert.IsTrue(result.Equals(new DateTime(2021, 4, 30)));
+        }
     }
 }

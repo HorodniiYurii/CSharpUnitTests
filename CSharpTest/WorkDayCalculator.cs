@@ -27,8 +27,14 @@ namespace CSharpTest
 
                 for (int i = 0; i < weekEnds.Length; i++)
                 {
-                    //if the weekend is in the range
-                    if (result > weekEnds[i].StartDate)
+                    // startDate coincides with weekEnds[i].EndDate of one of the weekends.
+                    if (startDate == weekEnds[i].EndDate)
+                    {
+                        TotalWeekEnds += 1;
+                        i++;
+                    }
+                    //if the weekend is between startDate and result
+                    if ((result > weekEnds[i].StartDate) && (startDate < weekEnds[i].StartDate))
                     {
                         //counting the number of weekEnds in range
                         CountWeekEnds = weekEnds[i].EndDate.Subtract(weekEnds[i].StartDate);
