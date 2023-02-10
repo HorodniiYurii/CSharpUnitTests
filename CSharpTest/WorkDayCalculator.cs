@@ -11,7 +11,7 @@ namespace CSharpTest
         public DateTime Calculate(DateTime startDate, int dayCount, WeekEnd[] weekEnds)
         {
             //end date no holidays
-            DateTime result = startDate.AddDays(dayCount); ;
+            DateTime result = startDate.AddDays(dayCount);
             //count of weekends in one range
             TimeSpan CountWeekEnds;
             //total count of weekends 
@@ -31,15 +31,28 @@ namespace CSharpTest
                     if (startDate == weekEnds[i].EndDate)
                     {
                         TotalWeekEnds += 1;
-                        i++;
+                        //i++;
+                        continue;
+                    }
+                    if (result == weekEnds[i].StartDate)
+                    {
+                        // i++;
+                        continue;
+                    }
+                    if ((weekEnds[i].StartDate <= startDate) && (startDate <= weekEnds[i].EndDate))
+                    {
+                        startDate = weekEnds[i].EndDate.AddDays(1);
+                        result = startDate.AddDays(dayCount);
+                        continue;
                     }
                     //if the weekend is between startDate and result
-                    if ((result > weekEnds[i].StartDate) && (startDate < weekEnds[i].StartDate))
+                    //if ((weekEnds[i].EndDate <= result) && (startDate >= weekEnds[i].StartDate))
+                    if ((result >= weekEnds[i].EndDate) && (startDate <= weekEnds[i].StartDate) || (result.AddDays(-1) == weekEnds[i].StartDate))
                     {
                         //counting the number of weekEnds in range
                         CountWeekEnds = weekEnds[i].EndDate.Subtract(weekEnds[i].StartDate);
                         //total the number of weekEnds in range
-                        TotalWeekEnds += (int)CountWeekEnds.TotalDays+1;
+                        TotalWeekEnds += (int)CountWeekEnds.TotalDays + 1;
                         //end date with holidays
                         result = startDate.AddDays(dayCount + TotalWeekEnds);
                     }
@@ -49,5 +62,5 @@ namespace CSharpTest
             return result;
         }
 
-}
+    }
 }
