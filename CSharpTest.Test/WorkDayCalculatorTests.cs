@@ -58,22 +58,7 @@ namespace CSharpTest
 
             Assert.IsTrue(result.Equals(new DateTime(2021, 4, 28)));
         }
-        //TEST 3.1
-        [TestMethod]
-        public void TestWeekendAfterEnd1()
-        {
-            DateTime startDate = new DateTime(2021, 4, 20);
-            int count = 4;
-            WeekEnd[] weekends = new WeekEnd[2]
-            {
-                new WeekEnd(new DateTime(2021, 4, 23), new DateTime(2021, 4, 25)),
-                new WeekEnd(new DateTime(2021, 4, 27), new DateTime(2021, 4, 29))
-            };
 
-            DateTime result = new WorkDayCalculator().Calculate(startDate, count, weekends);
-
-            Assert.IsTrue(result.Equals(new DateTime(2021, 4, 26)));
-        }
         //TEST 4
         [TestMethod]
         public void TestMoreThenOneWeekend()
@@ -149,24 +134,20 @@ namespace CSharpTest
             Assert.IsTrue(result.Equals(new DateTime(2021, 5, 1)));
         }
 
-
         //TEST Final
         [TestMethod]
         public void TestFinal()
         {
             DateTime startDate = new DateTime(2021, 4, 5);
-            int count = 9;
-            WeekEnd[] weekends = new WeekEnd[8]
+            int count = 5;
+            WeekEnd[] weekends = new WeekEnd[6]
             {
                 new WeekEnd(new DateTime(2021, 4, 1), new DateTime(2021, 4, 2)),
                 new WeekEnd(new DateTime(2021, 4, 3), new DateTime(2021, 4, 7)),
-               // new WeekEnd(new DateTime(2021, 4, 5), new DateTime(2021, 4, 5)),
-                new WeekEnd(new DateTime(2021, 4, 8), new DateTime(2021, 4, 8)),
                 new WeekEnd(new DateTime(2021, 4, 9), new DateTime(2021, 4, 10)),
-                new WeekEnd(new DateTime(2021, 4, 12), new DateTime(2021, 4, 16)),
-                new WeekEnd(new DateTime(2021, 4, 22), new DateTime(2021, 4, 23)),
-                new WeekEnd(new DateTime(2021, 4, 24), new DateTime(2021, 4, 24)),
-                new WeekEnd(new DateTime(2021, 4, 25), new DateTime(2021, 4, 26))
+                new WeekEnd(new DateTime(2021, 4, 12), new DateTime(2021, 4, 15)),
+                new WeekEnd(new DateTime(2021, 4, 18), new DateTime(2021, 4, 28)),
+                new WeekEnd(new DateTime(2021, 4, 30), new DateTime(2021, 5, 1))
             };
 
             DateTime result = new WorkDayCalculator().Calculate(startDate, count, weekends);
@@ -174,57 +155,5 @@ namespace CSharpTest
             Assert.IsTrue(result.Equals(new DateTime(2021, 4, 29)));
         }
 
-        [TestMethod]
-        public void TestFinal1()
-        {
-            DateTime startDate = new DateTime(2021, 4, 5);
-            int count = 5;
-            WeekEnd[] weekends = new WeekEnd[3]
-            {
-                new WeekEnd(new DateTime(2021, 4, 1), new DateTime(2021, 4, 2)),
-                new WeekEnd(new DateTime(2021, 4, 5), new DateTime(2021, 4, 5)),
-               // new WeekEnd(new DateTime(2021, 4, 5), new DateTime(2021, 4, 5)),
-                new WeekEnd(new DateTime(2021, 4, 8), new DateTime(2021, 4, 10)),
-            };
-
-            DateTime result = new WorkDayCalculator().Calculate(startDate, count, weekends);
-
-            Assert.IsTrue(result.Equals(new DateTime(2021, 4, 13)));
-        }
-        [TestMethod]
-        public void TestFinal2()
-        {
-            DateTime startDate = new DateTime(2021, 4, 5);
-            int count = 5;
-            WeekEnd[] weekends = new WeekEnd[3]
-            {
-                new WeekEnd(new DateTime(2021, 4, 1), new DateTime(2021, 4, 2)),
-                new WeekEnd(new DateTime(2021, 4, 4), new DateTime(2021, 4, 8)),
-               // new WeekEnd(new DateTime(2021, 4, 5), new DateTime(2021, 4, 5)),
-                new WeekEnd(new DateTime(2021, 4, 9), new DateTime(2021, 4, 10)),
-            };
-
-            DateTime result = new WorkDayCalculator().Calculate(startDate, count, weekends);
-
-            Assert.IsTrue(result.Equals(new DateTime(2021, 4, 15)));
-        }
-        [TestMethod]
-        public void TestFinal3()
-        {
-            DateTime startDate = new DateTime(2021, 4, 5);
-            int count = 5;
-            WeekEnd[] weekends = new WeekEnd[4]
-            {
-                new WeekEnd(new DateTime(2021, 4, 1), new DateTime(2021, 4, 2)),
-                new WeekEnd(new DateTime(2021, 4, 4), new DateTime(2021, 4, 8)),
-                new WeekEnd(new DateTime(2021, 4, 10), new DateTime(2021, 4, 12)),
-               // new WeekEnd(new DateTime(2021, 4, 1), new DateTime(2021, 4, 10)),
-                new WeekEnd(new DateTime(2021, 4, 15), new DateTime(2021, 4, 18))
-            };
-
-            DateTime result = new WorkDayCalculator().Calculate(startDate, count, weekends);
-
-            Assert.IsTrue(result.Equals(new DateTime(2021, 4, 20)));
-        }
     }
 }

@@ -24,30 +24,26 @@ namespace CSharpTest
             //if weekends > 1
             else
             {
-
                 for (int i = 0; i < weekEnds.Length; i++)
                 {
                     // startDate coincides with weekEnds[i].EndDate of one of the weekends.
                     if (startDate == weekEnds[i].EndDate)
                     {
                         TotalWeekEnds += 1;
-                        //i++;
                         continue;
                     }
                     if (result == weekEnds[i].StartDate)
                     {
-                        // i++;
                         continue;
                     }
-                    if ((weekEnds[i].StartDate <= startDate) && (startDate <= weekEnds[i].EndDate))
+                    //if startDate between weekEnds.StartDate and weekEnds.EndDate
+                    if (weekEnds[i].StartDate <= startDate && startDate <= weekEnds[i].EndDate)
                     {
                         startDate = weekEnds[i].EndDate.AddDays(1);
                         result = startDate.AddDays(dayCount);
-                        continue;
                     }
-                    //if the weekend is between startDate and result
-                    //if ((weekEnds[i].EndDate <= result) && (startDate >= weekEnds[i].StartDate))
-                    if ((result >= weekEnds[i].EndDate) && (startDate <= weekEnds[i].StartDate) || (result.AddDays(-1) == weekEnds[i].StartDate))
+                   
+                    if ((result >= weekEnds[i].EndDate && startDate <= weekEnds[i].StartDate) || (weekEnds[i].StartDate <= result && result <= weekEnds[i].EndDate))
                     {
                         //counting the number of weekEnds in range
                         CountWeekEnds = weekEnds[i].EndDate.Subtract(weekEnds[i].StartDate);
@@ -55,8 +51,10 @@ namespace CSharpTest
                         TotalWeekEnds += (int)CountWeekEnds.TotalDays + 1;
                         //end date with holidays
                         result = startDate.AddDays(dayCount + TotalWeekEnds);
+
                     }
                 }
+              
                 result = result.AddDays(-1);
             }
             return result;
